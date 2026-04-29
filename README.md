@@ -32,7 +32,23 @@ Because the server perfectly mimics the standard OpenAI API structure (`/v1/mode
 
 You don't need to build this from source! 
 
-👉 **[Download the Latest Release APK Here](https://github.com/techjarves/mobile-server/releases/download/first/app-release.apk)**
+👉 **[Download arm64-v8a](https://github.com/techjarves/mobile-server/releases/download/first/app-arm64-v8a-release.apk)** — for most modern phones
+
+👉 **[Download armeabi-v7a](https://github.com/techjarves/mobile-server/releases/download/first/app-armeabi-v7a-release.apk)** — for older 32-bit devices
+
+👉 **[Download universal](https://github.com/techjarves/mobile-server/releases/download/first/app-universal-release.apk)** — fallback for all devices
+
+### Pick the right APK for your device
+
+We provide **split ABI APKs** to reduce install size and fix parsing issues on certain devices. Choose the APK that matches your phone's CPU:
+
+| APK | Size | Device Type |
+|-----|------|-------------|
+| [app-arm64-v8a-release.apk](https://github.com/techjarves/mobile-server/releases/download/first/app-arm64-v8a-release.apk) | ~63 MB | **Most modern phones** (Pixel, Samsung, Xiaomi, OnePlus, etc.) |
+| [app-armeabi-v7a-release.apk](https://github.com/techjarves/mobile-server/releases/download/first/app-armeabi-v7a-release.apk) | ~35 MB | Older 32-bit ARM devices |
+| [app-universal-release.apk](https://github.com/techjarves/mobile-server/releases/download/first/app-universal-release.apk) | ~73 MB | Fallback — works on all devices |
+
+> 💡 **Not sure which one?** Download `app-arm64-v8a-release.apk` — it works on the vast majority of Android phones released after 2016.
 
 Simply download the APK, install it on your Android device, download a model from the list, and turn the server on.
 
@@ -52,10 +68,33 @@ Just open the link, paste in your phone's Cloudflare or Ngrok tunnel URL, and st
 
 If you want to build the project from source:
 
+### Prerequisites
+- Android SDK 35
+- JDK 17+
+
+### Build
+```bash
+cd Android/src
+./gradlew :app:assembleRelease
+```
+
+The split APKs will be generated in:
+```
+Android/src/app/build/outputs/apk/release/
+```
+
+| Output | Description |
+|--------|-------------|
+| `app-arm64-v8a-release.apk` | Modern 64-bit ARM phones |
+| `app-armeabi-v7a-release.apk` | Older 32-bit ARM devices |
+| `app-universal-release.apk` | All ABIs in one APK (fallback) |
+
+### Android Studio
 1. Clone this repository.
-2. Open the `/Android` folder in Android Studio.
-3. Build the `Debug` or `Release` variant. 
-*(Note: We have explicitly configured `android:extractNativeLibs="true"` so that the tunneling binaries extract properly in Release builds).*
+2. Open the `/Android/src` folder in Android Studio.
+3. Build the `Debug` or `Release` variant.
+
+> **Note:** We have explicitly configured `android:extractNativeLibs="true"` so that the tunneling binaries extract properly in Release builds.
 
 ## 📄 License
 

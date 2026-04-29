@@ -122,14 +122,14 @@ object OpenAiServerState {
     fun ngrokAuthToken(context: Context): String {
         return context.applicationContext
             .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .getString(KEY_NGROK_AUTH_TOKEN, "27EU8xAlKpERmOQPpeGRn4jTsg6_6GCfUawhJEiandVRs7hjD")
+            .getString(KEY_NGROK_AUTH_TOKEN, "")
             .orEmpty()
     }
 
     fun ngrokDomain(context: Context): String {
         return context.applicationContext
             .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .getString(KEY_NGROK_DOMAIN, "gratuitously-pentahydric-laila.ngrok-free.dev")
+            .getString(KEY_NGROK_DOMAIN, "")
             .orEmpty()
     }
 }
